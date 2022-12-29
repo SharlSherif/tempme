@@ -1,17 +1,15 @@
 const model = require("../models/compensation_data.model");
 const { constructQueries } = require("../utils/helpers");
 
-const fetchCompensationData = async (query) => {
-  const { _start = 0, _end = undefined } = query;
-  const queries = constructQueries(query);
+const fetchCompensationData = async (queries, pagination) => {
   console.log(queries);
   try {
     const count = await model.countDocuments(queries.lookup);
     const data = await model
       .find(queries.lookup)
       .sort(queries.sort)
-      .skip(_start)
-      .limit(_end - _start)
+      .skip(pagination._start)
+      .limit(pagination._end - pagination._start)
       .exec();
 
     return { data, count };
