@@ -1,4 +1,3 @@
-const { constructQueries } = require("../utils/helpers");
 const { SET, GET } = require("../utils/redis.util");
 
 const preRequestMiddleware = async (req, res, next) => {
@@ -8,8 +7,5 @@ const preRequestMiddleware = async (req, res, next) => {
   next();
 };
 
-const postRequestMiddleware = async (queries,) => {
-  // await SET(JSON.stringify(queries), )
-};
 
-module.exports = { preRequestMiddleware, postRequestMiddleware };
+module.exports = { preRequestMiddleware };

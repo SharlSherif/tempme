@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const compensationDataController = require("./controllers/compensation_data.controller");
 const {
   preRequestMiddleware,
-  postRequestMiddleware,
 } = require("./middlewares/compensation_data.middleware");
 require("dotenv").config();
 require("./config/mongodb.config");
@@ -28,12 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get(
-  "/compensation_data",
-  preRequestMiddleware,
-  compensationDataController,
-  postRequestMiddleware
-);
+app.get("/compensation_data", preRequestMiddleware, compensationDataController);
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log("Server listening at port %d", process.env.SERVER_PORT);
